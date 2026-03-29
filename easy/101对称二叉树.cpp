@@ -44,3 +44,36 @@ bool isSymmetric(struct TreeNode* root) {
 递归中如果是bool类型的返回应该怎么设计？一旦false就整个递归都是false，但是true不一定
 用短路特性，&& 连接递归调用
 */
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    bool recursion(TreeNode* a,TreeNode* b){
+        if(a == nullptr && b == nullptr){
+            return true;
+        }
+        if(a == nullptr || b == nullptr){
+            return false;
+        }
+        if(a->val != b->val){
+            return false;
+        }
+        return recursion(a->left,b->right)&&recursion(a->right,b->left);
+    }
+    bool isSymmetric(TreeNode* root) {
+        if(root == nullptr){
+            return true;
+        }
+        return recursion(root->left,root->right);
+    }
+};

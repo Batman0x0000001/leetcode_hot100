@@ -37,18 +37,27 @@ void moveZeroes(int* nums, int numsSize) {
 
 
 //代码优化
-void swap(int *a,int *b){
-    int t = *a;
-    *a = *b;
-    *b = t;
-}
-void moveZeroes(int* nums, int numsSize){
-    int left = 0,right = 0;
-    while(right < numsSize){
-        if(nums[right]){
-            swap(nums[left],nums[right]);
-            left++;
+#include<vector>
+#include<algorithm>
+using std::vector;
+using std::swap;
+
+class Solution {
+public:
+    void moveZeroes(vector<int>& nums) {
+        int n = nums.size(), left = 0, right = 0;
+        while (right < n) {
+            if (nums[right]) {
+                swap(nums[left], nums[right]);
+                left++;
+            }
+            right++;
         }
-        right++;
     }
-}
+};
+/*
+<algorithm> 或 <utility> 都提供了 swap：
+    #include <algorithm>  // C++11之前
+    #include <utility>    // C++11之后，swap移到这里了
+实际上包含任何STL头文件基本都会间接包含它，所以通常不用显式写。
+*/

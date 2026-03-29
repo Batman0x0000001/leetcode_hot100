@@ -86,51 +86,25 @@ struct ListNode* reverseList(struct ListNode* head) {
 
 
 //代码优化
-//1.hash
-#include"uthash.h"
-typedef struct HashNode{
-    struct ListNode *key;
-    UT_hash_handle hh;// 必须有这个字段
-}HashNode;
+//双指针 错位对齐
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(NULL) {}
+};
 
-struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB){
-    HashNode *hashmap = NULL;
-    struct ListNode *temp = headA;
-    while(temp != NULL){
-        HashNode *node;
-        HASH_FIND(hh,hashmap,&temp,sizeof(struct ListNode *),node);
-        if(node == NULL){
-            node == (HashNode *)malloc(sizeof(HashNode));
-            node->key = temp;
-            HASH_ADD(hh,hashmap,key,sizeof(struct ListNode *),node);
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA == nullptr || headB == nullptr){
+            return nullptr;
         }
-        temp = temp->next;
-    }
-    temp = headB;
-    while (temp != NULL)
-    {
-        HashNode *node;
-        HASH_FIND(hh,hashmap,&temp,sizeof(struct ListNode *),node);
-        if(node != NULL){
-            return node;
+        ListNode* list1 = headA;
+        ListNode* list2 = headB;
+        while(list1 != list2){
+            list1 = list1 == nullptr ? headB : list1->next;
+            list2 = list2 == nullptr ? headA : list2->next;
         }
-        temp = temp->next;
+        return list1;
     }
-    
-    return NULL;
-}
-//2.双指针
-struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB){
-    if(headA == NULL || headB == NULL){
-        return NULL;
-    }
-    struct ListNode *pA = headA;
-    struct ListNode *pB = headB;
-    while (pA != pB)
-    {
-        pA = (pA == NULL) ? headA : pA->next;
-        pB = (pB == NULL) ? headB : pB->next;
-    }
-
-    return pA;
-}
+};
