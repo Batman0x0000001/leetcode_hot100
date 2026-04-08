@@ -58,7 +58,7 @@ public:
             只有 map 和 unordered_map 有这种自动插入的 [] 运算符：
                 mp[pre]++;
                 等价于：
-                cppif(mp.find(pre) == mp.end()){
+                if(mp.find(pre) == mp.end()){
                     mp[pre] = 0;  // key不存在时自动插入，默认值为0
                 }
                 mp[pre]++;        // 再自增
