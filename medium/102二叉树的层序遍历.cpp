@@ -47,3 +47,29 @@ public:
         return ret;
     }
 };
+
+
+//迭代
+#include<queue>
+
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector<vector<int>> ret;
+        if(!root) return ret;
+
+        std::queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int size = q.size();
+            ret.emplace_back();
+            while(size--){
+                auto node = q.front(); q.pop();
+                ret.back().emplace_back(node->val);
+                if(node->left)  q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+        }
+        return ret;
+    }
+};

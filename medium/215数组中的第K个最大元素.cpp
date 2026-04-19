@@ -29,6 +29,7 @@ public:
 
 
 //快排
+//lomuto partition:单指针从左到右
 class Solution {
 public:
     int partition(vector<int>& nums, int left, int right){
@@ -60,7 +61,7 @@ public:
     }
 };
 
-
+//霍尔partition:双指针从两端向中间
 class Solution {
 public:
     int quickselect(vector<int> &nums, int l, int r, int k) {
@@ -83,7 +84,34 @@ public:
     }
 };
 
-//堆排
+//霍尔partition必须用 do while
+void quickSort(vector<int>& nums, int l, int r){
+    if(l >= r) return;
+    
+    int pivot = nums[l];  // 取左边为pivot
+    int i = l - 1, j = r + 1;
+    
+    while(i < j){
+        do i++; while(nums[i] < pivot);
+        do j--; while(nums[j] > pivot);
+        if(i < j) swap(nums[i], nums[j]);
+    }
+    /*
+    注意：不能写成：
+    int i = l, j = r;
+    while(i < j){
+        while(nums[i] < pivot) i++;  nums[i]==pivot时停下，i不动
+        while(nums[j] > pivot) j--;  nums[j]==pivot时停下，j不动
+        if(i < j) swap(nums[i], nums[j]);  swap后i,j仍然不动
+        导致i和j都卡在pivot位置，永远不移动 → 死循环
+    }
+    */
+    
+    quickSort(nums, l, j);
+    quickSort(nums, j+1, r);
+}
+
+//堆排(ok)
 #include<algorithm>
 using std::swap;
 

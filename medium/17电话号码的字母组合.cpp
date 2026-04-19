@@ -14,6 +14,12 @@
     digits[i] 是范围 ['2', '9'] 的一个数字。
 */
 
+
+/*
+    字符数字 → 整数	     c - '0'
+    字母    → 0~25	    c - 'a'
+    获取 ASCII	        (int)c
+*/
 #include<vector>
 #include<string>
 using std::vector;
@@ -27,7 +33,7 @@ public:
         }else{
             int idx = digits[i]-'0';//将字符转成数字
             for(char& it : map[idx]){
-                str.push_back(it);
+                str.push_back(it);//string这样使用
                 back_tracking(map,ret,str,digits,i+1);
                 str.pop_back();
             }

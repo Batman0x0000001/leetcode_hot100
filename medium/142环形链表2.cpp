@@ -33,7 +33,7 @@ struct ListNode {
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
-        if(head == nullptr || head->next == nullptr){
+        if(head == nullptr){
             return nullptr;
         }
         ListNode* fast = head;

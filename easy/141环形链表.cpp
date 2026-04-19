@@ -52,24 +52,6 @@ bool hasCycle(struct ListNode *head) {
 
 //代码优化
 //龟兔赛跑算法，兔子比乌龟快，如果有环，那么兔子和乌龟一定会相遇
-bool hasCycle(struct ListNode *head) {
-    if(head == NULL || head->next == NULL){
-        return false;
-    }
-    struct ListNode *fast = head;
-    struct ListNode *slow = head;
-    do{
-        if(fast->next == NULL || fast->next->next == NULL){
-            return NULL;
-        }
-        fast = fast->next->next;
-        slow = slow->next;
-    }while(fast != slow);
-    return true;
-}
-
-
-
 struct ListNode {
     int val;
     ListNode *next;
