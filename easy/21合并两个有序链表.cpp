@@ -126,6 +126,12 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 
+/*
+    ListNode *dummy = nullptr;  // dummy是指针，值为nullptr，没有指向任何对象
+    ListNode *list3 = dummy;    // list3也是nullptr
+    list3->next = ...;          // ❌ 解引用nullptr，崩溃
+*/
+
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
